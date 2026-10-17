@@ -1,0 +1,24 @@
+# environment
+.env
+.env.*
+!.env.example
+
+# editors
+.vscode/
+.idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# docker volumes / local db data
+postgres-data/
+pgdata/
+.data/
+
+# misc
+*.log
+*.bak
+*.tmp

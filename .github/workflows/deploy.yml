@@ -16,8 +16,8 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /opt/my-website
+            cd /opt/hrm
             git pull origin main
-            docker compose build --build-arg NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            docker compose build --build-arg NEXT_PUBLIC_API_URL=${{ vars.NEXT_PUBLIC_API_URL }}
             docker compose up -d 
             docker image prune -f

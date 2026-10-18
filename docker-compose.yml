@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   postgres:
     image: postgres:16-alpine
@@ -8,9 +6,7 @@ services:
     environment:
       POSTGRES_DB: hrmdb
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD must be set}
-    ports:
-      - "5435:5432"   
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD must be set}   
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -25,6 +21,7 @@ services:
       dockerfile: Dockerfile
     container_name: myapi_hrm
     restart: unless-stopped
+    env_file: .env
     environment:
       ASPNETCORE_ENVIRONMENT: Production
       ConnectionStrings__DefaultConnection: Host=postgres;Database=hrmdb;Username=postgres;Password=${DB_PASSWORD}
@@ -42,6 +39,7 @@ services:
         NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8082}
     container_name: myfrontend_hrm
     restart: unless-stopped
+    env_file: .env.web
     ports:
       - "3002:3000"
     depends_on:

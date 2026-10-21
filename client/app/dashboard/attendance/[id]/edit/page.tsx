@@ -74,7 +74,6 @@ export default async function EditAttendancePage({ params }: { params: Promise<{
       data={attendance}
     >
       <AttendanceForm
-        userId={attendance.userId}
         defaultValues={{
           name: attendance.name,
           date: attendance.date,

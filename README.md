@@ -5,6 +5,11 @@
 
 ---
 
+## 🧰 Tech Stack
+Next.js · TypeScript · Tailwind CSS · ASP.NET Core · PostgreSQL · Docker · GitHub Actions · Nginx · Linux (VPS) · Unit Testing
+
+---
+
 ## 🏢 Role Hierarchy
 The system operates on a strict **5-tier hierarchical structure**, ensuring the right level of authority for every user:
 - 👑 **Admin** – Full system control and oversight.
@@ -61,19 +66,32 @@ A dedicated space for staff to submit and track work-related reports:
 
 ---
 
-## 🚀 Deployment & DevOps
-This project follows modern DevOps practices with fully automated deployment pipelines:
-- **Containerized with Docker:** The entire application stack is containerized using Docker for consistent environments across development, testing, and production.
+ ## 🚀 Deployment & DevOps
+This project follows modern DevOps practices with fully automated, production-ready deployment pipelines:
+- **Unit Testing:** Comprehensive unit tests are executed automatically in the CI pipeline to ensure business logic reliability and prevent regressions.
 - **CI/CD with GitHub Actions:** Automated workflows handle testing, building, and deployment on every push.
-- **Transparent Build History:** All build logs, Docker image creation processes, and deployment statuses are publicly available in the **Actions tab** of this repository for full transparency.
+- **Containerization:** The entire application stack is containerized using Docker for consistent environments across development and production.
+- **Reverse Proxy:** Nginx serves as the reverse proxy in front of the application containers, handling SSL termination, load balancing, and secure routing.
+- **Hosting:** Deployed and managed on a Linux VPS for high availability, scalability, and optimal performance.
+- **Transparent Build History:** All build logs, Docker image creation processes, and deployment statuses are available in the **Actions tab** of this repository.
+
 
 ---
 
-## ⚖️ License
+## 📬 Contact
+Feel free to reach out for collaborations, inquiries, or opportunities:
+- **Email:** [sanazazarnia99@gmail.com]
+- **Website:** [https://sanazazarnia.com]
 
-**Proprietary & Confidential - All Rights Reserved**
+---
 
-This project is **closed-source**. The code, assets, and architecture are the exclusive property of the author. You are **not** granted any rights to copy, modify, distribute, sublicense, or use this software for any purpose, commercial or private. Unauthorized use, reproduction, or distribution is strictly prohibited and will be subject to legal action.
+ ## ⚖️ License
+
+**Source-Available — All Rights Reserved**
+
+The source code is publicly viewable for portfolio and review purposes only. 
+You are not granted any rights to copy, modify, distribute, sublicense, or use 
+this software for any purpose, commercial or private, without written permission.
 
 ---
 <p align="center">Built by Sanaz Azarnia (https://github.com/Sanaz-Azarnia) with Next.js, .NET Core, and PostgreSQL.

@@ -1,7 +1,8 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { X } from "lucide-react";
 
 function DashboardIcon({ className }: { className?: string }) {
     return (
@@ -60,44 +61,50 @@ const menuItems = [
     { href: '/dashboard/report', label: 'Report', icon: ReportIcon },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+    isOpen?: boolean;
+    onClose?: () => void;
+}
+
+export default function Sidebar({ isOpen = false, onClose }: SidebarProps) {
     const pathname = usePathname();
-    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="md:hidden fixed top-20 left-4 z-50 p-2 bg-white rounded-lg shadow-md border border-slate-200"
-                aria-label="Toggle menu"
-            >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    {isOpen ? (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    ) : (
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                    )}
-                </svg>
-            </button>
-
+            {/* Backdrop برای موبایل */}
             {isOpen && (
                 <div
-                    className="md:hidden fixed inset-0 bg-black/50 z-30"
-                    onClick={() => setIsOpen(false)}
+                    className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+                    onClick={onClose}
+                    aria-hidden="true"
                 />
             )}
 
             <aside className={`
-                fixed md:static inset-y-0 left-0 z-40 
+                fixed md:static inset-y-0 left-0 z-50
                 w-64 bg-white border-r border-slate-200 flex flex-col
                 transform transition-transform duration-300 ease-in-out
-                ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+                ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+                md:translate-x-0
                 min-h-screen md:min-h-0
             `}>
-                <nav className="flex-1 p-4 space-y-1 pt-20 md:pt-4">
+                {/* هدر سایدبار با دکمه بستن (فقط موبایل) */}
+                <div className="flex items-center justify-between p-4 border-b border-slate-100 md:hidden">
+                    <span className="text-sm font-semibold text-slate-900">
+                        HRM<span className="text-indigo-600 ml-1">Pro</span>
+                    </span>
+                    <button
+                        onClick={onClose}
+                        className="p-1.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-lg transition-colors"
+                        aria-label="Close menu"
+                    >
+                        <X className="w-5 h-5" />
+                    </button>
+                </div>
+
+                <nav className="flex-1 p-4 space-y-1">
                     {menuItems.map((item) => {
                         const Icon = item.icon;
-                        
                         const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
                         const linkClass = isActive
@@ -108,7 +115,7 @@ export default function Sidebar() {
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                onClick={() => setIsOpen(false)}
+                                onClick={() => onClose?.()}
                                 className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${linkClass}`}
                             >
                                 <Icon className="w-5 h-5" />

@@ -1,11 +1,15 @@
-"use client";
+ "use client";
 
 import { useRouter } from "next/navigation";
 import { useUser } from "@/contexts/UserContext";
 import { LogOut } from "lucide-react";
 import { useState } from "react";
 
-export function SignOutButton() {
+interface SignOutButtonProps {
+    onClick?: () => void;
+}
+
+export function SignOutButton({ onClick }: SignOutButtonProps) {
     const router = useRouter();
     const { refetch } = useUser();
     const [loading, setLoading] = useState(false);
@@ -31,6 +35,8 @@ export function SignOutButton() {
         } finally {
             setLoading(false);
         }
+
+        onClick?.();
     };
 
     return (
@@ -39,7 +45,8 @@ export function SignOutButton() {
             disabled={loading}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium 
                 text-red-600 hover:text-red-800 hover:bg-red-50 
-                rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed
+                w-full justify-center"
         >
             <LogOut className={`w-4 h-4 ${loading ? "animate-spin" : ""}`} />
             {loading ? "Signing out..." : "Sign Out"}

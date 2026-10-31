@@ -7,7 +7,7 @@ import { useUser } from '@/contexts/UserContext';
 import { NavLinks } from './NavLinks';
 import { SignOutButton } from './SignOutButton';
 import { AuthButtons } from './AuthButtons';
-import { PanelLeft } from 'lucide-react';
+import { MenuIcon } from './MenuIcon';
 
 export default function Header() {
     const { user } = useUser();
@@ -39,9 +39,9 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* موبایل: ستونی */}
-            <div className="mx-auto flex flex-col gap-3 px-6 py-4 md:hidden">
-                {/* خط اول: لوگو + دکمه منو */}
+            {/* موبایل */}
+            <div className="mx-auto flex flex-col px-6 py-4 md:hidden">
+                {/* خط اول: لوگو + دکمه همبرگری */}
                 <div className="flex items-center justify-between">
                     <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-3">
                         <div className="flex h-9 w-9 items-center justify-center">
@@ -52,24 +52,28 @@ export default function Header() {
                         </span>
                     </Link>
                     
-                    {/* فقط در صفحات غیر داشبورد دکمه منو نشون بده */}
-                    {!isDashboard && (
-                        <button
-                            className="p-2 text-slate-600 hover:text-slate-900 transition-colors"
-                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                            aria-label="Toggle menu"
-                        >
-                            <PanelLeft className="w-5 h-5" />
-                        </button>
-                    )}
+                    <button
+                        className="p-2 text-slate-600 hover:text-slate-900 transition-colors"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                        aria-label="Toggle menu"
+                    >
+                        <MenuIcon open={mobileMenuOpen} />
+                    </button>
                 </div>
 
-                {/* منوی موبایل (فقط در صفحات غیر داشبورد) */}
-                {!isDashboard && mobileMenuOpen && (
-                    <div className="flex flex-col gap-2 border-t border-slate-100 pt-3">
-                        {!user && <NavLinks mobile onClick={() => setMobileMenuOpen(false)} />}
-                        <div className="pt-3 border-t border-slate-100">
-                            {user ? <SignOutButton /> : <AuthButtons mobile onClick={() => setMobileMenuOpen(false)} />}
+                {/* منوی موبایل - ستونی */}
+                {mobileMenuOpen && (
+                    <div className="mt-4 flex flex-col gap-3 border-t border-slate-100 pt-4">
+                        {!user && !isDashboard && (
+                            <NavLinks mobile onClick={() => setMobileMenuOpen(false)} />
+                        )}
+                        
+                        <div className="flex flex-col gap-2 border-t border-slate-100 pt-3">
+                            {user ? (
+                                <SignOutButton onClick={() => setMobileMenuOpen(false)} />
+                            ) : (
+                                <AuthButtons mobile onClick={() => setMobileMenuOpen(false)} />
+                            )}
                         </div>
                     </div>
                 )}

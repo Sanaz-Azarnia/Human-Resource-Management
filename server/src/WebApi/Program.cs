@@ -29,8 +29,8 @@ builder.Services.AddCors(options =>
     {
          policy.WithOrigins(
             "http://localhost:3000",    
-            "http://yourdomain.com",     
-            "https://yourdomain.com"    
+            "http://hrm.sanazazarnia.com",     
+            "https://hrm.sanazazarnia.com"    
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
